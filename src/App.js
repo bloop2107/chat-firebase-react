@@ -3,6 +3,7 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import Button from './components/Button';
 import { useEffect, useState } from 'react';
+import Channel from './components/Channel';
 
 firebase.initializeApp({
     apiKey: "AIzaSyD9gaMJ9q5oFEeZhDtWmDjspeOUDh3lrM0",
@@ -15,6 +16,7 @@ firebase.initializeApp({
 
 const auth = firebase.auth();
 const provider = new firebase.auth.GoogleAuthProvider();
+const db = firebase.firestore();
 
 function App() {
 
@@ -63,7 +65,7 @@ function App() {
         user ? (
           <> 
             <Button onClick={logOut} children="Sign out"/>
-            <p>Welcome to the chat</p>
+            <Channel user={user} db={db}/>
           </>
         ) : (
           <Button onClick={signInWithGoogle} children="Sign in with Google" />
